@@ -1,8 +1,74 @@
 ﻿<Application x:Class="Attribute2Setter.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:shell="http://schemas.microsoft.com/winfx/2006/xaml/presentation/shell"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        <SolidColorBrush x:Key="AccentColor" Color="#c000c0"/>
+
+        <Style x:Key="MetroWindow" TargetType="Window">
+            <Setter Property="shell:WindowChrome.WindowChrome">
+                <Setter.Value>
+                    <shell:WindowChrome CaptionHeight="24" GlassFrameThickness="1" ResizeBorderThickness="4"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Window">
+                        <Grid Background="White">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="1"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.Resources>
+                                <Style TargetType="Rectangle">
+                                    <Setter Property="Fill" Value="{StaticResource AccentColor}"/>
+                                </Style>
+                            </Grid.Resources>
+
+                            <Grid Grid.Row="1" Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="24"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="30"/>
+                                        <ColumnDefinition Width="30"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="Margin" Value="6,0"/>
+                                        </Style>
+                                    </Grid.Resources>
+                                    <TextBlock Text="{TemplateBinding Title}" FontSize="16" Foreground="#555" FontWeight="Light"/>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <TextBlock Text="ABOUT" FontWeight="Bold" FontFamily="Segoe UI"/>
+                                    </StackPanel>
+                                    <Button Content="_" Grid.Column="2"/>
+                                    <Button Content="x" Grid.Column="3"/>
+                                </Grid>
+                                <ContentPresenter Grid.Row="1" Content="{TemplateBinding Content}"/>
+                            </Grid>
+
+                            <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
+                            <Rectangle Grid.Row="1" Grid.RowSpan="3" Grid.Column="0"/>
+                            <Rectangle Grid.Row="1" Grid.RowSpan="3" Grid.Column="2"/>
+                            <Rectangle Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>
